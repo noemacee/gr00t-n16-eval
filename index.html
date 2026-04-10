@@ -314,6 +314,35 @@
       </div>
     </div>
 
+    <!-- ── Novel instruction ── -->
+    <h3 class="title is-4" style="margin-top:2rem;">Novel Instruction Following</h3>
+    <div class="columns is-vcentered">
+      <div class="column is-6">
+        <div class="content">
+          <p>
+            We issued a novel language instruction entirely outside the training distribution:
+            <em>&ldquo;move the gripper to the bottom right&rdquo;</em>.
+            The model <strong>successfully follows the instruction</strong>,
+            moving the gripper to the bottom right of the workspace — despite never having
+            been trained on this command.
+          </p>
+          <p>
+            SimplerEnv scores this as 0% (the can is not picked up), but the robot
+            behavior is correct relative to the given goal.
+            This contrasts sharply with the malicious prompt experiment: the model responds
+            to geometrically grounded novel instructions but ignores instructions that
+            conflict with its trained action prior.
+          </p>
+        </div>
+      </div>
+      <div class="column is-6">
+        <p class="vid-label tag-finetuned">Novel Instruction &mdash; Follows &ldquo;move gripper bottom right&rdquo;</p>
+        <video controls muted loop playsinline>
+          <source src="static/videos/finetuned/gripper_bottom_right.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+
   </div>
 </section>
 
