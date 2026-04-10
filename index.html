@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GR00T N1.6: Zero-Shot vs Fine-Tuned on Google Robot Tasks</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="static/js/index.js"></script>
+</head>
+<body>
+
+<!-- ─── HERO ─────────────────────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+
+          <h1 class="title is-1 publication-title">
+            GR00T N1.6: Zero-Shot vs Fine-Tuned<br>on Google Robot Tasks
+          </h1>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://github.com/noemacee">Noé Macé</a>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-venue" style="margin-top:0.5rem;">
+            Robotics Security Division, ETHRC &nbsp;·&nbsp; April 2026
+          </div>
+
+          <div class="column has-text-centered" style="margin-top:1.5rem;">
+            <div class="publication-links">
+<span class="link-block">
+                <a href="https://huggingface.co/nvidia/GR00T-N1.6-3B"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fas fa-robot"></i></span>
+                  <span>Base Model</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://huggingface.co/nvidia/GR00T-N1.6-fractal"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fas fa-robot"></i></span>
+                  <span>Fine-tuned Model</span>
+                </a>
+              </span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TEASER VIDEO ──────────────────────────────────────────────────────── -->
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <div class="columns is-vcentered">
+        <div class="column">
+          <p class="subtitle has-text-centered tag-zero-shot">Zero-Shot — GR00T-N1.6-3B</p>
+          <video autoplay muted loop playsinline>
+            <source src="static/videos/zero_shot/pick_coke_can_representative.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="column">
+          <p class="subtitle has-text-centered tag-finetuned">Fine-Tuned — GR00T-N1.6-fractal</p>
+          <video autoplay muted loop playsinline>
+            <source src="static/videos/finetuned/pick_coke_can_representative.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+      <h2 class="subtitle has-text-centered" style="margin-top:1rem;">
+        Task: <strong>Pick Coke Can</strong> &mdash;
+        zero-shot fails on every trial (0&thinsp;/&thinsp;20);
+        fine-tuned succeeds on every trial (20&thinsp;/&thinsp;20).
+      </h2>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ABSTRACT ─────────────────────────────────────────────────────────── -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            We evaluate <strong>GR00T N1.6</strong> &mdash; NVIDIA&rsquo;s 3B-parameter generalist
+            robot foundation model &mdash; in two configurations on tabletop manipulation tasks
+            using the Google Robot embodiment in
+            <a href="https://simpler-env.github.io/">SimplerEnv</a>.
+            The <em>zero-shot</em> baseline uses the unmodified pretrained checkpoint
+            (<code>nvidia/GR00T-N1.6-3B</code>); the <em>fine-tuned</em> variant
+            (<code>nvidia/GR00T-N1.6-fractal</code>) was adapted on the Fractal dataset
+            (see <a href="#dataset">Training Data</a> below).
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FRACTAL DATASET ───────────────────────────────────────────────────── -->
+<section class="section" id="dataset">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Training Data: Fractal Dataset</h2>
+    <div class="columns is-vcentered">
+
+      <div class="column is-5 has-text-centered">
+        <div class="dataset-card">
+          <p class="dataset-icon"><i class="fas fa-database fa-3x"></i></p>
+          <p class="dataset-name"><code>fractal20220817_data</code></p>
+          <p class="dataset-sub">Open X-Embodiment &mdash; Google Robot</p>
+          <div class="dataset-links" style="margin-top:1rem;">
+            <a href="https://huggingface.co/datasets/IPEC-COMMUNITY/fractal20220817_data_lerobot"
+               class="button is-small is-rounded is-link is-light" style="margin:0.2rem;">
+              <span class="icon"><i class="fas fa-database"></i></span>
+              <span>HuggingFace Dataset</span>
+            </a>
+            <a href="https://huggingface.co/spaces/lerobot/visualize_dataset?path=%2FIPEC-COMMUNITY%2Ffractal20220817_data_lerobot%2Fepisode_0"
+               class="button is-small is-rounded is-link is-light" style="margin:0.2rem;">
+              <span class="icon"><i class="fas fa-play-circle"></i></span>
+              <span>Visualize Dataset</span>
+            </a>
+            <a href="https://huggingface.co/nvidia/GR00T-N1.6-fractal"
+               class="button is-small is-rounded is-link is-light" style="margin:0.2rem;">
+              <span class="icon"><i class="fas fa-robot"></i></span>
+              <span>Fine-tuned Checkpoint</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="column is-7">
+        <div class="content">
+          <p>
+            The fine-tuned model was trained on <strong>fractal20220817_data</strong>,
+            Google&rsquo;s real-robot manipulation dataset collected with the same
+            Google Robot used in these evaluations.
+            It is part of the
+            <a href="https://robotics-transformer-x.github.io/">Open X-Embodiment</a>
+            collection and contains demonstrations of tabletop pick-and-place,
+            drawer manipulation, and object rearrangement tasks.
+            The LeRobot-format version used here is hosted at
+            <a href="https://huggingface.co/datasets/IPEC-COMMUNITY/fractal20220817_data_lerobot">
+              IPEC-COMMUNITY/fractal20220817_data_lerobot</a>.
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── SETUP ─────────────────────────────────────────────────────────────── -->
+<section class="section" style="background:#fafafa;">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Experimental Setup</h2>
+    <div class="columns is-centered">
+      <div class="column is-10">
+        <table class="table is-fullwidth is-bordered is-striped">
+          <thead><tr><th>Component</th><th>Detail</th></tr></thead>
+          <tbody>
+            <tr><td>Simulation</td><td>SimplerEnv (MuJoCo, headless via EGL)</td></tr>
+            <tr><td>Robot</td><td>Google Robot (<code>OXE_GOOGLE</code> embodiment)</td></tr>
+            <tr><td>Zero-shot model</td><td><code>nvidia/GR00T-N1.6-3B</code> &mdash; 3B params, no task-specific training</td></tr>
+            <tr><td>Fine-tuned model</td><td><code>nvidia/GR00T-N1.6-fractal</code> &mdash; fine-tuned on OXE Fractal</td></tr>
+<tr><td>Episodes per task</td><td>20 per model</td></tr>
+            <tr><td>Hardware</td><td>AWS g5.2xlarge &mdash; NVIDIA A10G 24 GB, 32 GB RAM</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── RESULTS TABLE ─────────────────────────────────────────────────────── -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Results</h2>
+    <p class="has-text-centered" style="margin-bottom:1.5rem;">
+      Success rate over 10&ndash;20 episodes per condition.
+      Reference scores (<sup>†</sup>) are from the
+      <a href="https://github.com/NVIDIA/Isaac-GR00T/blob/main/examples/SimplerEnv/README.md">Isaac-GR00T SimplerEnv README</a>,
+      measured over 200 episodes with <code>nvidia/GR00T-N1.6-fractal</code>.
+    </p>
+
+    <table class="table is-fullwidth is-bordered results-table">
+      <thead>
+        <tr>
+          <th>Task</th>
+          <th class="has-text-centered tag-zero-shot">Zero-Shot<br><small>GR00T-N1.6-3B</small></th>
+          <th class="has-text-centered tag-finetuned">Fine-Tuned<br><small>GR00T-N1.6-fractal</small></th>
+          <th class="has-text-centered">Reference<sup>†</sup><br><small>200 eps</small></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Pick Coke Can</strong></td>
+          <td class="has-text-centered result-fail">0% &nbsp;<small class="has-text-grey">(0&thinsp;/&thinsp;20)</small></td>
+          <td class="has-text-centered result-pass">100% &nbsp;<small class="has-text-grey">(20&thinsp;/&thinsp;20)</small></td>
+          <td class="has-text-centered">97.5% &nbsp;<small class="has-text-grey">(195&thinsp;/&thinsp;200)</small></td>
+        </tr>
+        <tr>
+          <td><strong>Close Drawer</strong></td>
+          <td class="has-text-centered result-fail">0% &nbsp;<small class="has-text-grey">(0&thinsp;/&thinsp;10)</small></td>
+          <td class="has-text-centered result-mid">40% &nbsp;<small class="has-text-grey">(8&thinsp;/&thinsp;20)</small></td>
+          <td class="has-text-centered">87.5% &nbsp;<small class="has-text-grey">(175&thinsp;/&thinsp;200)</small></td>
+        </tr>
+        <tr>
+          <td><strong>Open Drawer</strong></td>
+          <td class="has-text-centered result-fail">0% &nbsp;<small class="has-text-grey">(0&thinsp;/&thinsp;10)</small></td>
+          <td class="has-text-centered result-fail">0% &nbsp;<small class="has-text-grey">(0&thinsp;/&thinsp;10)</small></td>
+          <td class="has-text-centered">44.0% &nbsp;<small class="has-text-grey">(88&thinsp;/&thinsp;200)</small></td>
+        </tr>
+        <tr>
+          <td><strong>Move Near</strong></td>
+          <td class="has-text-centered result-fail">0% &nbsp;<small class="has-text-grey">(0&thinsp;/&thinsp;10)</small></td>
+          <td class="has-text-centered result-pass">100% &nbsp;<small class="has-text-grey">(10&thinsp;/&thinsp;10)</small></td>
+          <td class="has-text-centered">75.5% &nbsp;<small class="has-text-grey">(151&thinsp;/&thinsp;200)</small></td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="has-text-grey is-size-7 has-text-centered">
+      &ldquo;&mdash;&rdquo; = run pending. &nbsp;
+      <sup>†</sup> Reference from
+      <a href="https://github.com/NVIDIA/Isaac-GR00T/blob/main/examples/SimplerEnv/README.md" class="has-text-grey">
+        Isaac-GR00T / examples / SimplerEnv / README.md</a>.
+    </p>
+  </div>
+</section>
+
+<!-- ─── VIDEO RESULTS ─────────────────────────────────────────────────────── -->
+<section class="section" style="background:#fafafa;">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Rollout Videos</h2>
+
+    <!-- ── Pick Coke Can ── -->
+    <div class="task-block">
+      <h3 class="title is-4">Pick Coke Can</h3>
+      <p class="task-meta">Zero-shot: <strong class="result-fail">0%</strong> &nbsp;&nbsp;
+        Fine-tuned: <strong class="result-pass">100%</strong> &nbsp;&nbsp;
+        Reference: 97.5%</p>
+      <div class="columns is-vcentered">
+        <div class="column">
+          <p class="vid-label tag-zero-shot">Zero-Shot &mdash; Failure</p>
+          <video controls muted loop playsinline>
+            <source src="static/videos/zero_shot/pick_coke_can_fail.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="column">
+          <p class="vid-label tag-finetuned">Fine-Tuned &mdash; Success</p>
+          <video controls muted loop playsinline>
+            <source src="static/videos/finetuned/pick_coke_can_success.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Close Drawer ── -->
+    <div class="task-block">
+      <h3 class="title is-4">Close Drawer</h3>
+      <p class="task-meta">Zero-shot: <strong class="result-fail">0%</strong> &nbsp;&nbsp;
+        Fine-tuned: <strong class="result-mid">40%</strong> &nbsp;&nbsp;
+        Reference: 87.5%</p>
+      <div class="columns is-vcentered">
+        <div class="column">
+          <p class="vid-label tag-zero-shot">Zero-Shot &mdash; Failure</p>
+          <video controls muted loop playsinline>
+            <source src="static/videos/zero_shot/close_drawer_fail.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="column">
+          <p class="vid-label tag-finetuned">Fine-Tuned &mdash; Success</p>
+          <video controls muted loop playsinline>
+            <source src="static/videos/finetuned/close_drawer_success.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Open Drawer ── -->
+    <div class="task-block">
+      <h3 class="title is-4">Open Drawer</h3>
+      <p class="task-meta">Zero-shot: <strong class="result-fail">0%</strong> &nbsp;&nbsp;
+        Fine-tuned: <strong class="result-fail">0%</strong> &nbsp;&nbsp;
+        Reference: 44.0%</p>
+      <div class="columns is-vcentered">
+        <div class="column">
+          <p class="vid-label tag-zero-shot">Zero-Shot &mdash; Failure</p>
+          <video controls muted loop playsinline>
+            <source src="static/videos/zero_shot/open_drawer_fail.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="column">
+          <p class="vid-label tag-finetuned" style="color:#c0392b;">Fine-Tuned &mdash; Failure</p>
+          <video controls muted loop playsinline>
+            <source src="static/videos/finetuned/open_drawer_fail.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Move Near ── -->
+    <div class="task-block">
+      <h3 class="title is-4">Move Near</h3>
+      <p class="task-meta">Zero-shot: <strong class="result-fail">0%</strong> &nbsp;&nbsp;
+        Fine-tuned: <strong class="result-pass">100%</strong> &nbsp;&nbsp;
+        Reference: 75.5%</p>
+      <div class="columns is-vcentered">
+        <div class="column">
+          <p class="vid-label tag-zero-shot">Zero-Shot &mdash; Failure</p>
+          <video controls muted loop playsinline>
+            <source src="static/videos/zero_shot/move_near_fail.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="column">
+          <p class="vid-label tag-finetuned">Fine-Tuned &mdash; Success</p>
+          <video controls muted loop playsinline>
+            <source src="static/videos/finetuned/move_near_representative.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── FOOTER ────────────────────────────────────────────────────────────── -->
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8 has-text-centered content">
+        <p>
+          Page template from
+          <a href="https://github.com/eliahuhorwitz/Academic-project-page-template">
+            Academic Project Page Template</a>.
+          Experiments run on AWS g5.2xlarge using
+          <a href="https://github.com/NVIDIA/Isaac-GR00T">Isaac-GR00T</a> +
+          <a href="https://simpler-env.github.io/">SimplerEnv</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
