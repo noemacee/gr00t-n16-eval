@@ -243,6 +243,42 @@
   </div>
 </section>
 
+<!-- ─── ANALYSIS ──────────────────────────────────────────────────────────── -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Analysis: Prompt Dependency</h2>
+    <div class="columns is-vcentered">
+
+      <div class="column is-6">
+        <div class="content">
+          <p>
+            To probe whether the fine-tuned model was overfitting to the task scene rather
+            than responding to language conditioning, we ran <code>GR00T-N1.6-fractal</code>
+            on <strong>Pick Coke Can</strong> with <strong>no language prompt</strong>.
+            The model fails on all 10 episodes (0%), compared to 100% with the prompt.
+          </p>
+          <p>
+            This is consistent with the model card note that
+            <code>GR00T-N1.6-fractal</code> was fine-tuned on real-robot Fractal data,
+            not on this SimplerEnv simulation setup — the model generalizes to the sim
+            only when the language goal is provided.
+          </p>
+        </div>
+      </div>
+
+      <div class="column is-6">
+        <p class="vid-label tag-finetuned" style="color:#d68910;">
+          Fine-Tuned, No Prompt &mdash; Failure &nbsp;<small class="has-text-grey">(0&thinsp;/&thinsp;10)</small>
+        </p>
+        <video controls muted loop playsinline>
+          <source src="static/videos/finetuned/pick_coke_can_no_prompt.mp4" type="video/mp4">
+        </video>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- ─── VIDEO RESULTS ─────────────────────────────────────────────────────── -->
 <section class="section" style="background:#fafafa;">
   <div class="container is-max-desktop">
