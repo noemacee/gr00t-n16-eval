@@ -97,14 +97,17 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            We evaluate <strong>GR00T N1.6</strong> &mdash; NVIDIA&rsquo;s 3B-parameter generalist
-            robot foundation model &mdash; in two configurations on tabletop manipulation tasks
+            We evaluate <strong>GR00T N1.6</strong> in two configurations on tabletop manipulation tasks
             using the Google Robot embodiment in
             <a href="https://simpler-env.github.io/">SimplerEnv</a>.
             The <em>zero-shot</em> baseline uses the unmodified pretrained checkpoint
             (<code>nvidia/GR00T-N1.6-3B</code>); the <em>fine-tuned</em> variant
             (<code>nvidia/GR00T-N1.6-fractal</code>) was adapted on the Fractal dataset
             (see <a href="#dataset">Training Data</a> below).
+            Beyond raw success rates, we probe how narrowly the fine-tuned model has
+            overfit to its training distribution &mdash; a question made pressing by evidence
+            that standard benchmarks such as LIBERO measure benchmark-specific memorization
+            rather than generalizable manipulation capability.
           </p>
         </div>
       </div>
